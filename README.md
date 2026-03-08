@@ -1,3 +1,3 @@
-# hirehorizon_backend_system
+# HireHorizon Frontend System
 
 currently working on its frontend
