@@ -15,63 +15,114 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const CompaniesTable = () => {
-  const { companies, searchCompanyByText } = useSelector((store) => store.company);
-  const [filterCompany, setFilterCompany] = useState()
+
+  const { companies, searchCompanyByText } = useSelector(
+    (store) => store.company
+  );
+
+  const [filterCompany, setFilterCompany] = useState([]);
+
   const navigate = useNavigate();
 
-  useEffect(() =>{
-    const filteredCompany = companies?.length >= 0 && companies.filter((company) =>{
-        if(!searchCompanyByText){
-            return true
-        };
-        return company?.name?.toLowerCase().includes(searchCompanyByText.toLowerCase());
-    });
-    setFilterCompany(filteredCompany)
+  useEffect(() => {
 
-  },[companies, searchCompanyByText])
+    const filteredCompany = companies?.filter((company) => {
+
+      if (!searchCompanyByText) {
+        return true;
+      }
+
+      return company?.name
+        ?.toLowerCase()
+        .includes(searchCompanyByText.toLowerCase());
+
+    });
+
+    setFilterCompany(filteredCompany || []);
+
+  }, [companies, searchCompanyByText]);
+
   return (
     <div>
+
       <Table>
-        <TableCaption>A list of your recent registered companies</TableCaption>
+
+        <TableCaption>
+          A list of your recent registered companies
+        </TableCaption>
+
         <TableHeader>
+
           <TableRow>
             <TableHead>Logo</TableHead>
             <TableHead>Name</TableHead>
             <TableHead>Date</TableHead>
             <TableHead className="text-right">Action</TableHead>
           </TableRow>
-        </TableHeader>
-        <TableBody>
-          
-          {Array.isArray(filterCompany) && filterCompany.map((company) => (
 
-            <tr>
+        </TableHeader>
+
+        <TableBody>
+
+          {filterCompany.map((company) => (
+
+            <TableRow key={company?._id}>
+
               <TableCell>
+
                 <Avatar>
-                  <AvatarImage src={company?.logo } />
+                  <AvatarImage src={company?.logo} />
                 </Avatar>
+
               </TableCell>
-              <TableCell className="cursor-pointer">{company.name}</TableCell>
+
               <TableCell className="cursor-pointer">
-                {company.createdAt.split("T")[0]}{" "}
+                {company?.name}
               </TableCell>
+
+              <TableCell className="cursor-pointer">
+                {company?.createdAt?.split("T")[0]}
+              </TableCell>
+
               <TableCell className="text-right">
+
                 <Popover>
+
                   <PopoverTrigger>
-                    <MoreHorizontal />
+                    <MoreHorizontal className="cursor-pointer" />
                   </PopoverTrigger>
-                  <PopoverContent className="w-33">
-                    <div onClick={() =>navigate(`/admin/companies/${company._id}`)} className="flex items-center gap-2 w-fit">
+
+                  <PopoverContent className="w-32">
+
+                    <div
+                      onClick={() =>
+                        navigate(`/admin/companies/${company?._id}`)
+                      }
+                      className="flex items-center gap-2 w-fit"
+                    >
+
                       <Edit2 className="w-4 cursor-pointer" />
-                      <span className="cursor-pointer">Edit</span>
+
+                      <span className="cursor-pointer">
+                        Edit
+                      </span>
+
                     </div>
+
                   </PopoverContent>
+
                 </Popover>
+
               </TableCell>
-            </tr>
+
+            </TableRow>
+
           ))}
+
         </TableBody>
+
       </Table>
+
     </div>
   );
 };

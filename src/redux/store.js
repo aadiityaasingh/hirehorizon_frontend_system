@@ -3,8 +3,10 @@ import authSlice from "./authSlice.js";
 import jobSlice from "./jobSlice.js";
 import companySlice from "./companySlice.js";
 import applicationSlice from "./applicationSlice.js";
+
 import {
   persistReducer,
+  persistStore,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -12,14 +14,15 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
+
 import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
   key: "root",
   version: 1,
   storage,
+  whitelist: ["auth"], // persist only auth
 };
-
 
 const rootReducer = combineReducers({
   auth: authSlice,
@@ -30,7 +33,7 @@ const rootReducer = combineReducers({
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const store = configureStore({
+export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -39,4 +42,5 @@ const store = configureStore({
       },
     }),
 });
-export default store;
+
+export const persistor = persistStore(store);

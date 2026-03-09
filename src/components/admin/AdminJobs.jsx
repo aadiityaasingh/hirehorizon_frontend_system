@@ -1,35 +1,59 @@
-import React, { useEffect, useState } from 'react'
-import Navbar from '../Navbar'
-import { useNavigate } from 'react-router-dom'
-import { Button } from '../ui/button'
-import { useDispatch } from 'react-redux'
-import AdminJobsTable from './AdminJobsTable'
-import { setSearchJobByText } from '@/redux/jobSlice'
-import useGetAllAdminJobs from '@/hooks/useGetAllAdminJobs'
+import React, { useEffect, useState } from "react";
+import Navbar from "../Navbar";
+import { useNavigate } from "react-router-dom";
+import { Button } from "../ui/button";
+import { useDispatch } from "react-redux";
+import AdminJobsTable from "./AdminJobsTable";
+import { setSearchJobByText } from "@/redux/jobSlice";
+import useGetAllAdminJobs from "@/hooks/useGetAllAdminJobs";
 
 const AdminJobs = () => {
-  useGetAllAdminJobs()
-  const [input, setInput] = useState("")
-  const navigate = useNavigate()
+
+  useGetAllAdminJobs();
+
+  const [input, setInput] = useState("");
+
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
 
   useEffect(() => {
+
     dispatch(setSearchJobByText(input));
-  },[input]);
+
+  }, [input, dispatch]);
+
   return (
     <div>
-      <Navbar/>
-      <div className='max-w-6xl mx-auto my-10'>
-        <div className='flex items-center justify-between my-5'>
-          <input className='w-fit rounded-md p-1 hover:border-2' placeholder='FIlter by name, role' onChange={(e) => setInput(e.target.value)} />
-          <Button className= "bg-blue-300 hover:bg-blue-400 cursor-pointer" onClick={()=> navigate("/admin/jobs/create")}>New Jobs</Button>
+
+      <Navbar />
+
+      <div className="max-w-6xl mx-auto my-10">
+
+        <div className="flex items-center justify-between my-5">
+
+          <input
+            className="w-fit rounded-md p-1 hover:border-2"
+            placeholder="Filter by name, role"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
+
+          <Button
+            className="bg-blue-300 hover:bg-blue-400 cursor-pointer"
+            onClick={() => navigate("/admin/jobs/create")}
+          >
+            New Jobs
+          </Button>
 
         </div>
-        <AdminJobsTable/>
+
+        <AdminJobsTable />
 
       </div>
-    </div>
-  )
-}
 
-export default AdminJobs
+    </div>
+  );
+};
+
+export default AdminJobs;

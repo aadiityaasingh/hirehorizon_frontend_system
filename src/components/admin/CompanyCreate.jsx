@@ -5,18 +5,28 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import axios from "axios";
-import { COMPANY_API_END_POINT } from "@/utlis/constant";
+import { COMPANY_API_END_POINT } from "@/utils/constant";
 import { toast } from "sonner";
 import { useDispatch } from "react-redux";
 import { setSingleCompany } from "@/redux/companySlice";
 
 const CompanyCreate = () => {
+
   const navigate = useNavigate();
-  const [companyName, setCompanyName] = useState();
+
   const dispatch = useDispatch();
 
+  const [companyName, setCompanyName] = useState("");
+
   const registerNewCompany = async () => {
+
+    if (!companyName.trim()) {
+      toast.error("Company name is required");
+      return;
+    }
+
     try {
+
       const res = await axios.post(
         `${COMPANY_API_END_POINT}/register`,
         { companyName },
@@ -27,36 +37,62 @@ const CompanyCreate = () => {
           withCredentials: true,
         }
       );
+
       if (res?.data?.success) {
+
         dispatch(setSingleCompany(res.data.company));
+
         toast.success(res.data.message);
+
         const companyId = res?.data?.company?._id;
+
         navigate(`/admin/companies/${companyId}`);
+
       }
+
     } catch (error) {
+
       console.log(error);
+
+      toast.error(
+        error.response?.data?.message || "Company creation failed"
+      );
+
     }
+
   };
+
   return (
     <div>
+
       <Navbar />
+
       <div className="max-w-4xl mx-auto">
+
         <div className="my-10">
-          <h1 className="font-bold text-2xl">Company Name</h1>
+
+          <h1 className="font-bold text-2xl">
+            Company Name
+          </h1>
+
           <p className="text-gray-500">
-            give a name tp your company and you can change it later
+            Give a name to your company and you can change it later
           </p>
+
         </div>
 
         <Label>Company Name</Label>
+
         <Input
           type="text"
           className="my-3 mt-5"
-          placeholder="google, microsoft etc."
+          placeholder="Google, Microsoft etc."
+          value={companyName}
           onChange={(e) => setCompanyName(e.target.value)}
         />
 
         <div className="flex items-center gap-2 my-10">
+
           <Button
             className="cursor-pointer hover:bg-red-400"
             variant="outline"
@@ -64,6 +100,7 @@ const CompanyCreate = () => {
           >
             Cancel
           </Button>
+
           <Button
             className="cursor-pointer hover:bg-blue-400"
             variant="outline"
@@ -71,8 +108,11 @@ const CompanyCreate = () => {
           >
             Continue
           </Button>
+
         </div>
+
       </div>
+
     </div>
   );
 };
