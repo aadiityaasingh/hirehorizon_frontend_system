@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 import FilterCard from "./FilterCard";
 import Job from "./Job";
 import { useSelector } from "react-redux";
-// import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 import useGetAllJobs from "@/hooks/useGetAllJobs";
 
 const Jobs = () => {

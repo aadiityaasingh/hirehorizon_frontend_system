@@ -23,7 +23,7 @@ const Job = ({ job }) => {
   const daysAgo = daysAgoFunction(job?.createdAt);
 
   return (
-    <div className="p-7 m-5 rounded-md shadow-xl bg-gray-100 border border-blue-300 cursor-pointer hover:shadow-2xl">
+    <div className="p-7 w-100 m-5 rounded-md shadow-xl bg-gray-100 border border-blue-300 cursor-pointer hover:shadow-2xl">
 
       <div className="flex items-center justify-between">
         <p className="text-sm text-gray-500">
