@@ -1,4 +1,4 @@
-export const USER_API_END_POINT ="http://localhost:8080/api/user";
-export const JOB_API_END_POINT = "http://localhost:8080/api/job";
-export const APPLICATION_API_END_POINT = "http://localhost:8080/api/application";
-export const COMPANY_API_END_POINT = "http://localhost:8080/api/company";
+export const USER_API_END_POINT ="https://hirehorizon-backend-system.onrender.com/api/user";
+export const JOB_API_END_POINT = "https://hirehorizon-backend-system.onrender.com/api/job";
+export const APPLICATION_API_END_POINT = "https://hirehorizon-backend-system.onrender.com/api/application";
+export const COMPANY_API_END_POINT = "https://hirehorizon-backend-system.onrender.com/api/company";
