@@ -131,7 +131,7 @@ const Signup = () => {
               value={input.fullname}
               name="fullname"
               onChange={changeEventHandler}
-              placeholder="Aditya Singh"
+              placeholder="Enter your full name"
               className="my-2"
             />
 
@@ -146,7 +146,7 @@ const Signup = () => {
               value={input.email}
               name="email"
               onChange={changeEventHandler}
-              placeholder="adis@gmail.com"
+              placeholder="enter your email"
               className="my-2"
             />
 
@@ -161,7 +161,7 @@ const Signup = () => {
               value={input.phoneNumber}
               name="phoneNumber"
               onChange={changeEventHandler}
-              placeholder="999999999"
+              placeholder="enter your phone number"
               className="my-2"
             />
 
