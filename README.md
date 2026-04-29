@@ -3,7 +3,7 @@
 A modern, responsive job portal frontend built with **React 19**, **Redux Toolkit**, **Tailwind CSS v4**, and **shadcn/ui**. Students can browse and apply for jobs while recruiters can manage companies, post jobs, and handle applicants — all in a clean, animated UI.
 
 > 🚀 **Live App:** [hirehorizonfrontendsystem.vercel.app](https://hirehorizonfrontendsystem.vercel.app)  
-> 🔗 **Backend Repo:** [hirehorizon-backend](https://github.com/aadiityaasingh/hirehorizon-backend)
+> 🔗 **Backend Repo:** [hirehorizon-backend](https://github.com/aadiityaasingh/hirehorizon_backend_system)
 
 ---
 
