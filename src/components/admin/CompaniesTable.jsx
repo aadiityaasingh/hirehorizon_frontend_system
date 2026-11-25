@@ -63,8 +63,14 @@ const CompaniesTable = () => {
         </TableHeader>
 
         <TableBody>
-
-          {filterCompany.map((company) => (
+          {filterCompany.length === 0 ? (
+            <TableRow>
+              <TableCell colSpan={4} className="text-center py-8 text-gray-500">
+                No companies registered yet. Click &quot;New Company&quot; to get started.
+              </TableCell>
+            </TableRow>
+          ) : (
+            filterCompany.map((company) => (
 
             <TableRow key={company?._id}>
 
@@ -117,7 +123,7 @@ const CompaniesTable = () => {
 
             </TableRow>
 
-          ))}
+          )))}
 
         </TableBody>
 
