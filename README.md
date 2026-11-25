@@ -31,20 +31,28 @@ A modern, high-performance, and responsive job portal frontend built with **Reac
 
 ### 👨‍🎓 Candidate / Student Experience
 - 🏠 **Landing Page** — Hero search trigger, job category carousel, and latest jobs showcase.
+
 - 🔍 **Jobs Directory & Filtering** — Filter by location, tech stack, and salary range with real-time updates.
+
 - 🤖 **AI Fit Percentage Badges** — Dynamic purple gradient badges (`✨ X% Fit`) appearing on job cards matching the candidate's profile skills.
+
 - 🌐 **Multi-Platform Source Tags** — Clear identification badges for jobs sourced from **Greenhouse**, **Lever**, **RemoteOK**, **We Work Remotely**, **Remotive**, **Arbeitnow**, **Jobicy**, and native **HireHoriZon** direct employers.
+
 - 📊 **AI Resume Match & Fit Assessment** — In-depth breakdown on job details:
   - Circular match percentage score (e.g. *100% Outstanding Match*, *Good Match*).
   - Matched skills badges (`✓ React`, `✓ Node.js`, `✓ TypeScript`, etc.).
   - Recommended skills to highlight in interviews (`+ Docker`, `+ Microservices`, etc.).
   - Actionable career advice explaining candidate alignment with the job.
+
 - ✍️ **AI Cover Letter Generator Modal**:
   - 4 customizable tones: *Professional & Impactful*, *Technical & Detailed*, *Startup & Fast-Paced*, or *Concise*.
   - Optional custom project highlight input.
   - Generates tailored letters with one-click **Copy to Clipboard** and **Download .txt**.
+
 - 💬 **Direct "Chat with Recruiter" Action** — Initiate real-time chat with the hiring team directly from any direct job listing.
+
 - 📄 **Profile & Resume Management** — Manage bio, phone number, skill tags with badges, and PDF resume upload/viewing.
+
 - 📋 **Applications & Saved Jobs** — Track submitted applications across all 5 recruitment stages and review bookmarked jobs.
 
 ---
@@ -56,12 +64,17 @@ A modern, high-performance, and responsive job portal frontend built with **Reac
   3. 📅 **Interview**
   4. 🏆 **Offer / Accepted**
   5. ❌ **Rejected**
+
 - 🗂 **Candidate Cards** — Display candidate avatar, email, phone, skill tags, resume link, and stage advancement buttons (`→ Screening`, `→ Interview`, `Accept`, `Reject`).
+
 - 🔄 **View Switcher** — Smoothly toggle between **Kanban Board** and **Table View** without losing state.
+
 - 🔍 **Live Candidate Search** — Instant client-side filtering of applicants by candidate name, email, or skill.
+
 - 📥 **One-Click CSV Export** — Export all applicant records into a structured spreadsheet containing:
   `Candidate Name, Email, Phone, Current Pipeline Stage, Skills, Applied Date, Resume Link`.
 - 🏢 **Company Setup** — Register and edit company profiles, description, website, and logo uploads.
+
 - 💼 **Job Postings** — Post new positions with LPA compensation, experience levels, and skill tags.
 
 ---
@@ -258,4 +271,4 @@ npm run lint      # Run ESLint to verify code quality
 
 ---
 
-> Built with 💙 as part of the HireHorizon Full-Stack Recruitment Ecosystem
+> Built with 💙
