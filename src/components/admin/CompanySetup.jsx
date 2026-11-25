@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Navbar from "../Navbar";
 import { Button } from "../ui/button";
-import { ArrowLeft, Loader2 } from "lucide-react";
+import { ArrowLeft, Building2, Loader2 } from "lucide-react";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import axios from "axios";
@@ -12,9 +12,7 @@ import { useSelector } from "react-redux";
 import useGetCompanyById from "@/hooks/useGetCompanyById";
 
 const CompanySetup = () => {
-
   const { id } = useParams();
-
   useGetCompanyById(id);
 
   const { singleCompany } = useSelector((store) => store.company);
@@ -28,35 +26,27 @@ const CompanySetup = () => {
   });
 
   const [loading, setLoading] = useState(false);
-
   const navigate = useNavigate();
 
   const changeEventHandler = (e) => {
-
     setInput({
       ...input,
       [e.target.name]: e.target.value,
     });
-
   };
 
   const changeFileHandler = (e) => {
-
     const file = e.target.files?.[0];
-
     setInput({
       ...input,
       file,
     });
-
   };
 
   const submitHandler = async (e) => {
-
     e.preventDefault();
 
     const formData = new FormData();
-
     formData.append("name", input.name);
     formData.append("description", input.description);
     formData.append("website", input.website);
@@ -67,7 +57,6 @@ const CompanySetup = () => {
     }
 
     try {
-
       setLoading(true);
 
       const res = await axios.put(
@@ -82,31 +71,20 @@ const CompanySetup = () => {
       );
 
       if (res.data.success) {
-
-        toast.success(res.data.message);
-
+        toast.success(res.data.message || "Company updated successfully");
         navigate("/admin/companies");
-
       }
-
     } catch (error) {
-
-      console.log(error);
-
+      console.error("Company update error:", error);
       toast.error(
         error.response?.data?.message || "Company update failed"
       );
-
     } finally {
-
       setLoading(false);
-
     }
-
   };
 
   useEffect(() => {
-
     if (!singleCompany) return;
 
     setInput({
@@ -116,134 +94,120 @@ const CompanySetup = () => {
       location: singleCompany.location || "",
       file: null,
     });
-
   }, [singleCompany]);
 
   return (
-    <div>
-
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       <Navbar />
 
-      <div className="max-w-xl mx-auto my-10">
-
-        <form onSubmit={submitHandler}>
-
-          <div className="flex items-center gap-5 p-6">
-
+      <main className="max-w-3xl mx-auto w-full px-4 py-8 flex-1">
+        <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-sm">
+          <div className="flex items-center gap-4 pb-6 border-b border-gray-100">
             <Button
               type="button"
               onClick={() => navigate("/admin/companies")}
               variant="outline"
-              className="flex items-center gap-2 text-gray-500 font-semibold"
+              size="sm"
+              className="flex items-center gap-1.5 text-gray-600 cursor-pointer"
             >
-
-              <ArrowLeft />
-
+              <ArrowLeft className="w-4 h-4" />
               <span>Back</span>
-
             </Button>
 
-            <h1 className="font-bold text-xl">
-              Company Setup
-            </h1>
-
+            <div>
+              <h1 className="font-bold text-2xl text-gray-900 flex items-center gap-2">
+                <Building2 className="w-6 h-6 text-blue-600" />
+                Edit Company Profile
+              </h1>
+              <p className="text-sm text-gray-500">
+                Update logo, description, website, and office headquarters.
+              </p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <form onSubmit={submitHandler} className="mt-6 space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="name">Company Name</Label>
+                <Input
+                  id="name"
+                  type="text"
+                  name="name"
+                  value={input.name}
+                  onChange={changeEventHandler}
+                  required
+                  className="mt-1"
+                />
+              </div>
 
-            <div>
+              <div>
+                <Label htmlFor="location">Headquarters / Location</Label>
+                <Input
+                  id="location"
+                  type="text"
+                  name="location"
+                  value={input.location}
+                  onChange={changeEventHandler}
+                  placeholder="e.g. Bangalore, India"
+                  className="mt-1"
+                />
+              </div>
 
-              <Label>Company Name</Label>
+              <div>
+                <Label htmlFor="website">Website URL</Label>
+                <Input
+                  id="website"
+                  type="url"
+                  name="website"
+                  value={input.website}
+                  onChange={changeEventHandler}
+                  placeholder="https://example.com"
+                  className="mt-1"
+                />
+              </div>
 
-              <Input
-                type="text"
-                name="name"
-                value={input.name}
-                onChange={changeEventHandler}
-              />
-
+              <div>
+                <Label htmlFor="file">Company Logo (Image)</Label>
+                <Input
+                  id="file"
+                  type="file"
+                  accept="image/*"
+                  onChange={changeFileHandler}
+                  className="mt-1 file:cursor-pointer"
+                />
+              </div>
             </div>
 
             <div>
-
-              <Label>Description</Label>
-
-              <Input
-                type="text"
+              <Label htmlFor="description">About the Company</Label>
+              <textarea
+                id="description"
                 name="description"
+                rows={4}
                 value={input.description}
                 onChange={changeEventHandler}
+                placeholder="Describe your company culture, mission, and achievements..."
+                className="mt-1 flex w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
               />
-
             </div>
-
-            <div>
-
-              <Label>Website</Label>
-
-              <Input
-                type="text"
-                name="website"
-                value={input.website}
-                onChange={changeEventHandler}
-              />
-
-            </div>
-
-            <div>
-
-              <Label>Location</Label>
-
-              <Input
-                type="text"
-                name="location"
-                value={input.location}
-                onChange={changeEventHandler}
-              />
-
-            </div>
-
-            <div>
-
-              <Label>Logo</Label>
-
-              <Input
-                type="file"
-                accept="image/*"
-                onChange={changeFileHandler}
-              />
-
-            </div>
-
-          </div>
-
-          {loading ? (
-
-            <Button className="w-full my-4">
-
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-
-              Please wait
-
-            </Button>
-
-          ) : (
 
             <Button
               type="submit"
-              className="w-full my-4 bg-blue-400 cursor-pointer hover:bg-blue-500"
+              disabled={loading}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium cursor-pointer"
             >
-
-              Update
-
+              {loading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Saving changes...
+                </>
+              ) : (
+                "Save Company Profile"
+              )}
             </Button>
-
-          )}
-
-        </form>
-
-      </div>
-
+          </form>
+        </div>
+      </main>
     </div>
   );
 };
