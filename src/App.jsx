@@ -14,9 +14,13 @@ import CompanyCreate from './components/admin/CompanyCreate'
 import CompanySetup from './components/admin/CompanySetup'
 import AdminJobs from './components/admin/AdminJobs'
 import PostJob from './components/admin/PostJob'
+import JobSetup from './components/admin/JobSetup'
 import Applicants from './components/admin/Applicants'
+import NotFound from './components/NotFound'
 
 import ProtectedRoute from './components/admin/ProtectedRoute'
+import { SocketProvider } from './context/SocketContext'
+import ChatDialog from './components/chat/ChatDialog'
 
 const appRouter = createBrowserRouter([
   { path: '/', element: <Home /> },
@@ -33,11 +37,18 @@ const appRouter = createBrowserRouter([
   { path: '/admin/companies/:id', element: <ProtectedRoute><CompanySetup /></ProtectedRoute> },
   { path: '/admin/jobs', element: <ProtectedRoute><AdminJobs /></ProtectedRoute> },
   { path: '/admin/jobs/create', element: <ProtectedRoute><PostJob /></ProtectedRoute> },
-  { path: '/admin/jobs/:id/applicants', element: <ProtectedRoute><Applicants /></ProtectedRoute> }
+  { path: '/admin/jobs/:id/edit', element: <ProtectedRoute><JobSetup /></ProtectedRoute> },
+  { path: '/admin/jobs/:id/applicants', element: <ProtectedRoute><Applicants /></ProtectedRoute> },
+  { path: '*', element: <NotFound /> }
 ])
 
 function App() {
-  return <RouterProvider router={appRouter} />
+  return (
+    <SocketProvider>
+      <RouterProvider router={appRouter} />
+      <ChatDialog />
+    </SocketProvider>
+  )
 }
 
 export default App
