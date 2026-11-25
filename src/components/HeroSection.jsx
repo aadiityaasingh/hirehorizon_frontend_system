@@ -1,41 +1,61 @@
-import React, { useState } from 'react'
-import { Button } from './ui/button'
-import { Search } from 'lucide-react'
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { setSearchedQuery } from '@/redux/jobSlice';
+import React, { useState } from "react";
+import { Button } from "./ui/button";
+import { Search, Sparkles } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setSearchedQuery } from "@/redux/jobSlice";
 
 const HeroSection = () => {
   const [query, setQuery] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const searchJobHandler = () => {
-    dispatch(setSearchedQuery(query));
+  const searchJobHandler = (e) => {
+    if (e) e.preventDefault();
+    if (!query.trim()) return;
+    dispatch(setSearchedQuery(query.trim()));
     navigate("/browse");
-
-  }
+  };
 
   return (
-    <div>
-      <div className='text-center'>
-        <div className='flex flex-col gap-5 my-10'>
-            <span className='mx-auto px-4 py-2 rounded-full bg-gray-100 text-blue-600 font-medium'>No. 1 Job Find Website</span>
-            <h1 className='text-5xl font-bold'>Search, Apply &<br/> Get Your <span className='text-blue-500'>Dream Jobs</span></h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, quidem?</p>
-            <div className='flex w-[40%] shadow-lg border border-gray-200 pl-3 rounded-full items-center gap-4 mx-auto'>
-                <input type="text"
-                placeholder='Find your job'
-                onChange={(e) => setQuery(e.target.value)}
-                className='outline-none border-none w-full' />
-                <Button onClick={searchJobHandler} className="rounded-r-full bg-blue-400 cursor-pointer">
-                    <Search className='h-5 w-5'/>
-                </Button>
-            </div>
+    <div className="relative overflow-hidden py-12 md:py-20 px-4">
+      <div className="text-center max-w-4xl mx-auto">
+        <div className="flex flex-col gap-6">
+          <span className="inline-flex items-center gap-2 mx-auto px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 font-medium text-sm border border-blue-100">
+            <Sparkles className="w-4 h-4" /> Leading Job Portal for Tech & Design
+          </span>
+
+          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900 leading-tight">
+            Search, Apply &amp; <br />
+            Get Your <span className="text-blue-600">Dream Career</span>
+          </h1>
+
+          <p className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+            Discover thousands of curated job openings from high-growth startups and Fortune 500 companies. One-click apply and start your journey today.
+          </p>
+
+          <form
+            onSubmit={searchJobHandler}
+            className="flex w-full max-w-xl shadow-md border border-gray-200 pl-4 py-1 rounded-full items-center gap-2 mx-auto bg-white focus-within:ring-2 focus-within:ring-blue-400 focus-within:border-transparent transition-all"
+          >
+            <input
+              type="text"
+              placeholder="Job title, keywords, or company..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              className="outline-none border-none w-full text-gray-700 placeholder-gray-400 text-sm md:text-base bg-transparent"
+            />
+            <Button
+              type="submit"
+              className="rounded-full bg-blue-600 hover:bg-blue-700 text-white cursor-pointer px-5"
+            >
+              <Search className="h-5 w-5" />
+            </Button>
+          </form>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default HeroSection
+export default HeroSection;
