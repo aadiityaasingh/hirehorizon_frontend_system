@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "./ui/button";
-import { Search, Sparkles } from "lucide-react";
+import { Search } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setSearchedQuery } from "@/redux/jobSlice";
@@ -21,10 +21,6 @@ const HeroSection = () => {
     <div className="relative overflow-hidden py-12 md:py-20 px-4">
       <div className="text-center max-w-4xl mx-auto">
         <div className="flex flex-col gap-6">
-          <span className="inline-flex items-center gap-2 mx-auto px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 font-medium text-sm border border-blue-100">
-            <Sparkles className="w-4 h-4" /> Leading Job Portal for Tech & Design
-          </span>
-
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900 leading-tight">
             Search, Apply &amp; <br />
             Get Your <span className="text-blue-600">Dream Career</span>
