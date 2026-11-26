@@ -14,4 +14,16 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "vendor-react": ["react", "react-dom", "react-router-dom"],
+          "vendor-redux": ["@reduxjs/toolkit", "react-redux", "redux-persist"],
+          "vendor-socket": ["socket.io-client"],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 600,
+  },
 })
