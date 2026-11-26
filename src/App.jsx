@@ -34,30 +34,30 @@ const PageLoader = () => (
   </div>
 );
 
-const withSuspense = (Component) => (
+const withSuspense = (element) => (
   <Suspense fallback={<PageLoader />}>
-    <Component />
+    {element}
   </Suspense>
 );
 
 const appRouter = createBrowserRouter([
   { path: '/', element: <Home /> },
-  { path: '/login', element: withSuspense(Login) },
-  { path: '/signup', element: withSuspense(Signup) },
-  { path: '/jobs', element: withSuspense(Jobs) },
-  { path: '/description/:id', element: withSuspense(JobDescription) },
-  { path: '/browse', element: withSuspense(Browse) },
-  { path: '/profile', element: withSuspense(Profile) },
+  { path: '/login', element: withSuspense(<Login />) },
+  { path: '/signup', element: withSuspense(<Signup />) },
+  { path: '/jobs', element: withSuspense(<Jobs />) },
+  { path: '/description/:id', element: withSuspense(<JobDescription />) },
+  { path: '/browse', element: withSuspense(<Browse />) },
+  { path: '/profile', element: withSuspense(<Profile />) },
 
   // admin routes
-  { path: '/admin/companies', element: <ProtectedRoute>{withSuspense(Companies)}</ProtectedRoute> },
-  { path: '/admin/companies/create', element: <ProtectedRoute>{withSuspense(CompanyCreate)}</ProtectedRoute> },
-  { path: '/admin/companies/:id', element: <ProtectedRoute>{withSuspense(CompanySetup)}</ProtectedRoute> },
-  { path: '/admin/jobs', element: <ProtectedRoute>{withSuspense(AdminJobs)}</ProtectedRoute> },
-  { path: '/admin/jobs/create', element: <ProtectedRoute>{withSuspense(PostJob)}</ProtectedRoute> },
-  { path: '/admin/jobs/:id/edit', element: <ProtectedRoute>{withSuspense(JobSetup)}</ProtectedRoute> },
-  { path: '/admin/jobs/:id/applicants', element: <ProtectedRoute>{withSuspense(Applicants)}</ProtectedRoute> },
-  { path: '*', element: withSuspense(NotFound) }
+  { path: '/admin/companies', element: <ProtectedRoute>{withSuspense(<Companies />)}</ProtectedRoute> },
+  { path: '/admin/companies/create', element: <ProtectedRoute>{withSuspense(<CompanyCreate />)}</ProtectedRoute> },
+  { path: '/admin/companies/:id', element: <ProtectedRoute>{withSuspense(<CompanySetup />)}</ProtectedRoute> },
+  { path: '/admin/jobs', element: <ProtectedRoute>{withSuspense(<AdminJobs />)}</ProtectedRoute> },
+  { path: '/admin/jobs/create', element: <ProtectedRoute>{withSuspense(<PostJob />)}</ProtectedRoute> },
+  { path: '/admin/jobs/:id/edit', element: <ProtectedRoute>{withSuspense(<JobSetup />)}</ProtectedRoute> },
+  { path: '/admin/jobs/:id/applicants', element: <ProtectedRoute>{withSuspense(<Applicants />)}</ProtectedRoute> },
+  { path: '*', element: withSuspense(<NotFound />) }
 ])
 
 function App() {
