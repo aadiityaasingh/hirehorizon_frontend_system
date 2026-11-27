@@ -17,9 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         loading={
           <div className="min-h-screen flex flex-col items-center justify-center bg-white font-sans">
             <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold text-lg shadow-sm">
-                H
-              </div>
+              <img src="/HireHoriZonlogo.png" alt="HireHoriZon" className="w-10 h-10 object-contain" />
               <span className="text-2xl font-bold tracking-tight text-gray-900">
                 Hire<span className="text-blue-600">HoriZon</span>
               </span>
